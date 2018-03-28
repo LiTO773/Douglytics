@@ -5,8 +5,9 @@ export default class Home extends Component {
 	render() {
 		return (
 			<div class={style.home}>
-				<h1>Home</h1>
-				<p>This is the Home component.</p>
+				<p>Type the word you want to find out!</p>
+				<input class={style.input} placeholder="quirks" type="text"/>
+				<button class={style.button}>Let's find out!</button>
 			</div>
 		);
 	}

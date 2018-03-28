@@ -1,0 +1,13 @@
+.footer {
+  font-family: 'IBM Plex Serif';
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+a {
+  text-decoration-line: none;
+}
