@@ -700,8 +700,8 @@ var word_Word = function (_Component) {
 	Word.prototype.componentDidMount = function componentDidMount() {
 		var _this2 = this;
 
-		// fetch(`/words/${this.props.word.toLowerCase()}.txt`)
-		fetch('/words/' + this.props.word.toLowerCase() + '.txt').then(function (result) {
+		var newWord = this.props.word.toLowerCase().replace(/\W/, '');
+		fetch('/words/' + newWord + '.txt').then(function (result) {
 			return result.json();
 		}).then(function (count) {
 			return _this2.setState({ count: count });

@@ -7,8 +7,8 @@ export default class Word extends Component {
 	}
 
   componentDidMount() {
-		// fetch(`/words/${this.props.word.toLowerCase()}.txt`)
-    fetch(`/words/${this.props.word.toLowerCase()}.txt`)
+		var newWord = this.props.word.toLowerCase().replace(/\W/, '');
+    fetch(`/words/${newWord}.txt`)
 		 .then(result => result.json())
 		 .then(count => this.setState({count}))
 		 .catch(() => this.setState({count: 0}))
