@@ -2,13 +2,10 @@
 This folder is dedicated to external scripts that help the page function properly. So far it only has 1 Python script, which is used to get all the words.
 
 ## words.py
-This script is used to get all the words from Doug's videos and store them in files with the respective count.
+This script is used to get all the words from Doug's videos and stores them in files with the respective count. This files are saved in a folder called `words`, which is currently located in: `<root>/docs/words`
 
 To use this script please follow these instructions:
 ``` bash
-# delete the current words folder
-rm -rf words
-
 # create the necessary directories
 mkdir subtitles
 mkdir words
