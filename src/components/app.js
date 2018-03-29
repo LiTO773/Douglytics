@@ -4,6 +4,7 @@ import { Router } from 'preact-router';
 import Header from './header';
 import Footer from './footer';
 import Home from '../routes/home';
+import Word from '../routes/word';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -26,6 +27,7 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+					<Word path="/:word" />
 				</Router>
 				<Footer />
 			</div>
