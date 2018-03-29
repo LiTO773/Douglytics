@@ -515,7 +515,7 @@ function footer__inherits(subClass, superClass) { if (typeof superClass !== "fun
 
 
 
-var footer__ref = Object(preact_min["h"])(
+var _ref = Object(preact_min["h"])(
 	'h3',
 	null,
 	'Made by LiTO \u2022',
@@ -539,7 +539,7 @@ var footer_Footer = function (_Component) {
 		return Object(preact_min["h"])(
 			'div',
 			{ 'class': footer_style_default.a.footer },
-			footer__ref
+			_ref
 		);
 	};
 
@@ -625,10 +625,10 @@ function word__inherits(subClass, superClass) { if (typeof superClass !== "funct
 
 
 
-var _ref2 = Object(preact_min["h"])(
-	'span',
+var word__ref = Object(preact_min["h"])(
+	'p',
 	null,
-	'345 times'
+	'Searching \uD83D\uDD0D'
 );
 
 var _ref3 = Object(preact_min["h"])(
@@ -651,35 +651,72 @@ var word_Word = function (_Component) {
 
 		return _ret = (_temp = (_this = word__possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
 			count: undefined
+		}, _this.correctRender = function () {
+			if (_this.state.count === undefined) {
+				return word__ref;
+			} else if (_this.state.count === 0) {
+				return Object(preact_min["h"])(
+					'div',
+					null,
+					Object(preact_min["h"])(
+						'p',
+						null,
+						'No, he hasn\'t said ',
+						Object(preact_min["h"])(
+							'b',
+							null,
+							_this.props.word
+						),
+						' \uD83D\uDE14 (yet)'
+					)
+				);
+			} else {
+				return Object(preact_min["h"])(
+					'div',
+					null,
+					Object(preact_min["h"])(
+						'p',
+						null,
+						'Yup, Doug has already said ',
+						Object(preact_min["h"])(
+							'b',
+							null,
+							_this.props.word
+						),
+						'! \uD83D\uDE00'
+					),
+					Object(preact_min["h"])(
+						'span',
+						null,
+						_this.state.count,
+						' ',
+						_this.state.count === 1 ? 'time' : 'times'
+					)
+				);
+			}
 		}, _temp), word__possibleConstructorReturn(_this, _ret);
 	}
 
 	Word.prototype.componentDidMount = function componentDidMount() {
+		var _this2 = this;
+
+		// fetch(`/words/${this.props.word.toLowerCase()}.txt`)
 		fetch('/words/' + this.props.word.toLowerCase() + '.txt').then(function (result) {
-			return console.log(result.json());
+			return result.json();
+		}).then(function (count) {
+			return _this2.setState({ count: count });
+		}).catch(function () {
+			return _this2.setState({ count: 0 });
 		});
-		// .then(items=>this.setState({items}))
 	};
 
-	Word.prototype.componentWillUpdate = function componentWillUpdate() {
-		//TODO: Shows loading/Shows how many times the word was said/No word found
-		// First let me setup GitHub Pages
-	};
-
-	Word.prototype.render = function render(_ref) {
-		var word = _ref.word;
+	Word.prototype.render = function render(_ref2) {
+		var word = _ref2.word;
 
 		return Object(preact_min["h"])(
 			'div',
 			{ 'class': word_style_default.a.home },
-			Object(preact_min["h"])(
-				'p',
-				null,
-				'Yup, Doug has said ',
-				word,
-				'!'
-			),
-			_ref2,
+			this.correctRender(),
 			_ref3
 		);
 	};

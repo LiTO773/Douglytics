@@ -7,21 +7,38 @@ export default class Word extends Component {
 	}
 
   componentDidMount() {
+		// fetch(`/words/${this.props.word.toLowerCase()}.txt`)
     fetch(`/words/${this.props.word.toLowerCase()}.txt`)
- 		.then(result=>console.log(result.json()))
-    // .then(items=>this.setState({items}))
+		 .then(result => result.json())
+		 .then(count => this.setState({count}))
+		 .catch(() => this.setState({count: 0}))
 	}
 
-	componentWillUpdate() {
-		//TODO: Shows loading/Shows how many times the word was said/No word found
-		// First let me setup GitHub Pages
+	correctRender = () => {
+		if (this.state.count === undefined) {
+			return (
+				<p>Searching 🔍</p>
+			)
+		} else if (this.state.count === 0) {
+			return (
+				<div>
+					<p>No, he hasn't said <b>{this.props.word}</b> 😔 (yet)</p>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<p>Yup, Doug has already said <b>{this.props.word}</b>! 😀</p>
+					<span>{this.state.count} {this.state.count === 1 ? 'time' : 'times'}</span>
+				</div>
+			)
+		}
 	}
 
 	render({ word }) {
 		return (
 			<div class={style.home}>
-				<p>Yup, Doug has said {word}!</p>
-				<span>345 times</span>
+				{this.correctRender()}
 				<a href="/" class="button">Try again!</a>
 			</div>
 		);
